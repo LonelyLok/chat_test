@@ -1,0 +1,5 @@
+google-generativeai
+python-dotenv
+cassandra-driver
+Flask
+flask-cors

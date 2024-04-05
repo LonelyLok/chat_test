@@ -1,0 +1,44 @@
+version: '3'
+services:
+  cassandra:
+    image: cassandra:latest
+    container_name: cassandra_dev
+    ports:
+      - "9042:9042"
+    environment:
+      - CASSANDRA_CLUSTER_NAME=MyCassandraCluster
+      - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
+      - CASSANDRA_DC=datacenter1
+      - CASSANDRA_RACK=rack1
+    volumes:
+      - ./data:/var/lib/cassandra
+    networks:
+      - cassandra_network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: backend_dev
+    ports:
+      - "5000:5000"
+    depends_on:
+      - cassandra
+    networks:
+      - cassandra_network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend_dev
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    networks:
+      - cassandra_network
+
+networks:
+  cassandra_network:
+    driver: bridge
