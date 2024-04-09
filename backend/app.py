@@ -129,7 +129,12 @@ def update_user_session():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    # app.run(debug=True, host='0.0.0.0', port=5000)
+    docker_compose_mode = os.getenv('DOCKER_COMPOSE')
+    if docker_compose_mode == 'True':
+        app.run(debug=True, host='0.0.0.0', port=5000)
+    else:
+        app.run(debug=True)
 
     # chat = model.start_chat()
     # response = chat.send_message('hello what is the plan for today?')

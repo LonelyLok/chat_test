@@ -3,7 +3,8 @@ import os
 import config
 
 class CassandraClient:
-    def __init__(self, hosts=[os.getenv('CASSANDRA_DB_HOST')], port=9042):
+    docker_compose_mode = os.getenv('DOCKER_COMPOSE')
+    def __init__(self, hosts=['cassandra' if docker_compose_mode == 'True' else os.getenv('CASSANDRA_DB_HOST')], port=9042):
         self.hosts = hosts
         self.port = port
         self.session = self.connect()
@@ -11,9 +12,8 @@ class CassandraClient:
     def connect(self):
         """Connect to the Cassandra cluster and establish a session with connection pooling."""
         cluster = Cluster(
-            # self.hosts, 
-            # port=self.port,
-            Cluster(['cassandra'], port=9042),
+            self.hosts, 
+            port=self.port,
         )
         session = cluster.connect()
         print("Connected to Cassandra with connection pooling")
