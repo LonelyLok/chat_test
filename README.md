@@ -28,12 +28,15 @@ CASSANDRA_DB_HOST=127.0.0.1
 ```
 
 There are three services in the docker-compose.yml file that you will need to start:
-- cassandra: A container for running the Cassandra database
+- cassandra: A container for running the Cassandra database. It mount the data from a `data` folder in the current directory.
 - backend: A container for running the Flask server
 - frontend: A container for running the React.js frontend
 
 Run `docker-compose up` to start all the services.
 
+On your first time, after starting the services, go inside the backend container and run `db_init.py` to initialize the database.
+
 or
 
-You can only run docker-compose up cassandra to start only the cassandra service. Then, you can run `python3 app.py` inside backend folder to start the Flask server and `npm run dev` inside frontend folder to start the React.js frontend.
+You can only run docker-compose up cassandra to start only the cassandra service. On your first time, run `db_init.py` to initialize the database.
+Then, you can run `python3 app.py` inside backend folder to start the Flask server and `npm run dev` inside frontend folder to start the React.js frontend.

@@ -21,11 +21,9 @@ def list_models():
 # models/gemini-1.0-pro-001
 # models/gemini-1.0-pro-latest
 # models/gemini-1.0-pro-vision-latest
-# models/gemini-1.0-ultra-latest
 # models/gemini-1.5-pro-latest
 # models/gemini-pro
 # models/gemini-pro-vision
-# models/gemini-ultra
 
 # if __name__ == '__main__':
 #   model = genai.GenerativeModel('models/gemini-ultra')

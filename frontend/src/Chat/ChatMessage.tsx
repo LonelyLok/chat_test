@@ -13,7 +13,6 @@ type Message = { id: number; text: string; sender: 'user' | 'bot' };
 
 const models = [
   'models/gemini-1.5-pro-latest',
-  'models/gemini-1.0-ultra-latest',
 ];
 
 const ChatMessage = ({ activeSessionId, userId }: { activeSessionId: string; userId: string }) => {

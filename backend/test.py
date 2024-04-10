@@ -34,10 +34,16 @@ add_model_column_query = """
         ALTER TABLE chat.user_sessions ADD model TEXT;
         """
 
+drop_key_space_query = """
+        DROP KEYSPACE IF EXISTS chat;
+        """
+
 if __name__ == '__main__':
     client = CassandraClient()  # Initialize the client with your Cassandra cluster's configuration
-    client.execute_query(
-        add_model_column_query
+    result = client.execute_query(
+        drop_key_space_query
     )
-    print("chat_history table created.")
+#     print(result)
+#     print(list(result))
+    print("query finished")
     client.close() 
